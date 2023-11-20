@@ -1,27 +1,29 @@
 package menues;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Scanner;
 
+import interfaces.Usuario;
 import modelos.usuarios.Cliente;
 import modelos.usuarios.Empleado;
 
 public class MenuRegistroLogin {
 
     // Atributos
-    private ArrayList<Empleado> listaEmpleados;
-    private ArrayList<Cliente> listaClientes;
+    List<Usuario> listaUsuarios;
     private Scanner sc;
     private boolean continuar = true;
 
     // Constructor
-    public MenuRegistroLogin(ArrayList<Empleado> listaEmpleados, ArrayList<Cliente> listaClientes, Scanner sc) {
-        this.listaClientes = listaClientes;
-        this.listaEmpleados = listaEmpleados;
+    public MenuRegistroLogin(List<Usuario> listaUsuarios, Scanner sc) {
+        this.listaUsuarios = listaUsuarios;
         this.sc = sc;
     }
 
     // Genericos
+
+    // Muestras las opciones de Login o Registro
     private void mostrarOpciones() {
         System.out.println("---------------------------------------------");
         System.out.println("BIENVENIDO AL SISTEMA DE ALTA DE USUARIO");
@@ -31,6 +33,7 @@ public class MenuRegistroLogin {
         System.out.print("Por favor, elija una de las siguientes opciones: ");
     }
 
+    // Muestra las opciones de rol que puede elegir el usuario
     private void mostrarOpcionRoles() {
         System.out.println("---------------------------------------------");
         System.out.println("Elija un rol eligiendo una de las opciones numericas: ");
@@ -40,6 +43,7 @@ public class MenuRegistroLogin {
         System.out.print("Por favor, elija uno de los roles: ");
     }
 
+    // Funcion para iniciar el programa
     public void iniciar() {
         while (continuar) {
             int opcion = this.elegirOpcion();
@@ -47,12 +51,15 @@ public class MenuRegistroLogin {
         }
     }
 
+    // Funcion para elegir una opcion
     private int elegirOpcion() {
         this.mostrarOpciones();
         int opcion = this.sc.nextInt();
         return opcion;
     }
 
+    // Funcion que sirve para elegir el rol ya sea para el registro como para el
+    // login
     private String elegirRol() {
 
         boolean seguir = true;
@@ -77,6 +84,8 @@ public class MenuRegistroLogin {
         return rolAsignado;
     }
 
+    // Funcion que realiza las acciones de LOGIN o de REGISTRO dependiendo de lo que
+    // elijamos
     private void realizarOpcion(int opcion) {
         switch (opcion) {
             case 1:
@@ -94,18 +103,28 @@ public class MenuRegistroLogin {
     }
 
     // Metodos del menu
+
+    // Registro de usuarios
+
+    /*
+     * Esta funcion se va a encargar de la logica de>
+     * - Registro del usuario
+     * - Alta de usuario (EMPLEADO o CLIENTE)
+     * - Guardar el usuario dependiendo de su rol (listaClientes o listaEmpleados)
+     */
+
     private void registroUsuario() {
         System.out.println("--------------------- REGISTRO ---------------------");
 
-        // Le asigno un rol al usuario
-        String rolIngresado = this.elegirRol().toLowerCase();
+        // Primero comienzo ingresando los datos necesarios para registrar el nuevo
+        // Usuario
 
-        // Ingrso el nombre del usuario
+        // Ingreso el nombre del usuario
         System.out.print("Nombre de usuario: ");
         String nombreIngresado = this.sc.next();
 
-        // Verifico si el usuario ya existe
-        boolean existeUsuario = this.validarExistenciaUsuario(nombreIngresado, rolIngresado);
+        // Verifico si el nombre de usuario ingresado ya existe
+        boolean existeUsuario = this.validarExistenciaUsuario(nombreIngresado);
 
         // Si el nombre del usuario existe lanzo un mensaje de error
         if (existeUsuario) {
@@ -134,6 +153,9 @@ public class MenuRegistroLogin {
 
         // Caso contrario procedo a seguir con el registro
 
+        // Asigno un rol
+        String rolIngresado = this.elegirRol();
+
         // Si el rol que le asigne al usuario es EMPLEADO solicito la clave adicional y
         // lo registro
         if (rolIngresado.equals("empleado")) {
@@ -146,32 +168,40 @@ public class MenuRegistroLogin {
             }
 
             // Si la clave secreta es correcta cre el nuevo empleado
-            Empleado nuevoEmpleado = new Empleado(nombreIngresado, claveIngresada, rolIngresado);
+            Empleado nuevoEmpleado = new Empleado(nombreIngresado, claveIngresada);
 
-            listaEmpleados.add(nuevoEmpleado);
+            listaUsuarios.add(nuevoEmpleado);
         }
 
         // Si el rol que se le asigno es CLIENTE procedo a crear el nuevo cliente
-        Cliente nuevoCliente = new Cliente(nombreIngresado, claveIngresada, rolIngresado, 0);
+        Cliente nuevoCliente = new Cliente(nombreIngresado, claveIngresada, 0);
 
         // Almaceno el nuevo cliente en la lista de clientes
-        listaClientes.add(nuevoCliente);
+        listaUsuarios.add(nuevoCliente);
         System.out.println("Registro exitoso. ¡Bienvenido!");
 
     }
 
+    // Logueo de Usuarios
+
+    /*
+     * Esta funcion se va a encargar de la logica de:
+     * - Logueo del usuario
+     * - Acceso al menu de usuario dependendiendo del rol que se le asigno
+     */
+
     private void loginUsuario() {
+
         System.out.println("--------------------- LOGIN ---------------------");
 
+        // Ingreso el rol del Usuario
+        String rolUsuario = this.elegirRol().toLowerCase();
         // Ingreso el nombre de Usuario
         System.out.print("Nombre de usuario: ");
         String nombreUsuario = this.sc.next();
 
-        // Ingreso el rol del Usuario
-        String rolUsuario = this.elegirRol().toLowerCase();
-
         // Valido que exista dicho usuario
-        boolean existeUsuario = this.validarExistenciaUsuario(nombreUsuario, rolUsuario);
+        boolean existeUsuario = this.validarExistenciaUsuario(nombreUsuario);
 
         // Si el usuario no existe lanzo un mensaje de error
         if (!existeUsuario) {
@@ -194,47 +224,30 @@ public class MenuRegistroLogin {
 
     }
 
-    // Verifiar si el usuario existe
-    private boolean validarExistenciaUsuario(String nombreUsuario, String rolIngresado) {
+    // Verificar la existencia del Usuario
+
+    /*
+     * Esta funcion se va a encargar de:
+     * - Validar la existencia del usuario
+     * - Para que se valide su existencia es necesario:
+     * - El nombre del usuario
+     * - El rol ingresado
+     */
+    private boolean validarExistenciaUsuario(String nombreUsuario) {
 
         // Parto con una premisa booleana
         boolean existeUsuario = false;
 
-        // Primero verifico que rol se le asigno al usuario
-
-        if (rolIngresado.equals("cliente")) {
-
-            // Si el rol que se ingreso es cliente, reccoro la lista de clientes
-            for (Cliente cliente : listaClientes) {
-
-                // Si el nombre del cliente de turno es igual al nombre del usuario que
-                // ingresamos entonces el valor de mi premisa sera TRUE
-                if (nombreUsuario.equals(cliente.getNombreUsuario())) {
-                    existeUsuario = true;
-                    break;
-                }
-            }
-        }
-
-        if (rolIngresado.equals("empleado")) {
-
-            // Si el rol que se ingreso es empleado, reccoro la lista de empleado
-            for (Empleado empleado : listaEmpleados) {
-
-                // Si el nombre del empleado de turno es igual al nombre del usuario que
-                // ingresamos entonces el valor de mi premisa sera TRUE
-                if (nombreUsuario.equals(empleado.getNombreUsuario())) {
-                    existeUsuario = true;
-                    break;
-                }
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario)) {
+                existeUsuario = true;
+                break;
             }
         }
 
         // Devuelvo el valor final de la premisa
         return existeUsuario;
     }
-
-   
 
     // Validar igualdad de la contraseña reingresada
     private boolean validarClaves(String clave, String claveReingresada) {
@@ -258,36 +271,6 @@ public class MenuRegistroLogin {
 
         // Parto con una premisa booleana
         boolean sonIguales = false;
-
-         // Primero verifico que rol se le asigno al usuario
-
-        if (rolIngresado.equals("cliente")) {
-
-            // Si el rol que se ingreso es cliente, reccoro la lista de clientes
-            for (Cliente cliente : listaClientes) {
-
-                // Si el nombre del cliente de turno es igual al nombre del usuario que
-                // ingresamos entonces el valor de mi premisa sera TRUE
-                if (claveIngresada.equals(cliente.getClaveUsuario())) {
-                    sonIguales = true;
-                    break;
-                }
-            }
-        }
-
-        if (rolIngresado.equals("empleado")) {
-
-            // Si el rol que se ingreso es empleado, reccoro la lista de empleado
-            for (Empleado empleado : listaEmpleados) {
-
-                // Si el nombre del empleado de turno es igual al nombre del usuario que
-                // ingresamos entonces el valor de mi premisa sera TRUE
-                if (claveIngresada.equals(empleado.getClaveUsuario())) {
-                    sonIguales = true;
-                    break;
-                }
-            }
-        }
 
         // Devuelvo el valor final de la premisa
         return sonIguales;

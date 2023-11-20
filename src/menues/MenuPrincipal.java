@@ -1,22 +1,21 @@
 package menues;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.Scanner;
 
-import modelos.usuarios.Cliente;
-import modelos.usuarios.Empleado;
+import interfaces.Usuario;
+
 
 public class MenuPrincipal {
 
     private boolean continuar = true;
     private Scanner sc;
-    ArrayList<Empleado> listaEmpleados;
-    ArrayList<Cliente> listaClientes;
+    List<Usuario> listaUsuarios;
 
-    public MenuPrincipal(Scanner sc, ArrayList<Empleado> listaEmpleados, ArrayList<Cliente> listaClientes) {
+    public MenuPrincipal(Scanner sc, List<Usuario> listaUsuarios) {
         this.sc = sc;
-        this.listaEmpleados = listaEmpleados;
-        this.listaClientes = listaClientes;
+        this.listaUsuarios = listaUsuarios;
     }
 
     private void mostrarOpciones() {
@@ -54,7 +53,7 @@ public class MenuPrincipal {
                 this.finalizar();
                 break;
             case 1:
-                MenuRegistroLogin mRegistroLogin = new MenuRegistroLogin(listaEmpleados, listaClientes, sc);
+                MenuRegistroLogin mRegistroLogin = new MenuRegistroLogin(listaUsuarios, sc);
                 mRegistroLogin.iniciar();
                 break;
             default:
