@@ -158,7 +158,7 @@ public class MenuRegistroLogin {
         // Si el rol que elegí para el usuario es EMPLEADO solicito la clave adicional y
         // lo registro
 
-        if (rolIngresado.equals("EMPLEADO")) {
+        if (rolIngresado.equals("empleado")) {
             System.out.print("Ingrese la clave de empleado: ");
             String claveEmpleado = this.sc.next();
 
