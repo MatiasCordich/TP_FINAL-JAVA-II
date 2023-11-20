@@ -1,6 +1,5 @@
 package menues;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -153,7 +152,7 @@ public class MenuRegistroLogin {
 
         // Caso contrario procedo a seguir con el registro
 
-        // Elijo un rol 
+        // Elijo un rol
         String rolIngresado = this.elegirRol();
 
         // Si el rol que elegí para el usuario es EMPLEADO solicito la clave adicional y
@@ -163,7 +162,8 @@ public class MenuRegistroLogin {
             System.out.print("Ingrese la clave de empleado: ");
             String claveEmpleado = this.sc.next();
 
-            // Si la clave ingresada no es igual a la clave secreta para registrar el empleado lanzo un mensaje de error
+            // Si la clave ingresada no es igual a la clave secreta para registrar el
+            // empleado lanzo un mensaje de error
             if (!claveEmpleado.equals("pepepiola123")) {
                 System.out.println("Clave de empleado incorrecta. Registro fallido.");
                 return;
@@ -210,18 +210,25 @@ public class MenuRegistroLogin {
             return;
         }
 
-        // Caso contrario procedo a seguir con el logue
+        // Caso contrario procedo a seguir con el logueo
         System.out.print("Contraseña: ");
         String claveUsuario = this.sc.next();
 
         // Verifico que la contraseña sea correcta
         boolean validarClave = this.validarClave(claveUsuario);
 
-        if (validarClave) {
-            System.out.println("Inicio de sesión exitoso. ¡Bienvenido!");
-        } else {
+        // Si la clave es incorrecta lanzo un mensaje de error
+        if (!validarClave) {
             System.out.println("Contraseña incorrecta. Inicio de sesión fallido.");
         }
+
+        // Caso contrario ingreso al menu dependiendo del rol de usuario A PARTIR DE ACA SE TIENE QUE SEGUIR
+        // MENU EMPLEADOS
+            // STOCK
+        // MENU CLIENTE
+            // CARRITO
+            // SALDO
+        System.out.println("Inicio de sesión exitoso. ¡Bienvenido!");
 
     }
 
@@ -243,7 +250,8 @@ public class MenuRegistroLogin {
 
             // Por cada usuario obtengo su nombre
             if (usuario.getNombreUsuario().equals(nombreIngresado)) {
-                // Si el nombre del usuario de turno es igual al nombreIngresado entonces la premisa es TRUE
+                // Si el nombre del usuario de turno es igual al nombreIngresado entonces la
+                // premisa es TRUE
                 existeUsuario = true;
                 break;
             }
@@ -258,8 +266,8 @@ public class MenuRegistroLogin {
      * Esta funcion se va a encargar de:
      * - Validar que ambas claves en el registro sean identicas
      * - Para que se valide su existencia recibe por parámetro:
-     *  - la clave (String)
-     *  - la clave reingresada (String)
+     * - la clave (String)
+     * - la clave reingresada (String)
      */
     private boolean validarClaves(String clave, String claveReingresada) {
 
@@ -282,7 +290,7 @@ public class MenuRegistroLogin {
      * Esta funcion se va a encargar de:
      * - Validar que la clave ingresada sea identica a la clave del usuario
      * - Para que se valide su existencia recibe por parámetro:
-     *  - la clave reingresada (String)
+     * - la clave reingresada (String)
      */
     private boolean validarClave(String claveIngresada) {
 
