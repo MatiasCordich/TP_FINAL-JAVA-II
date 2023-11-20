@@ -71,10 +71,10 @@ public class MenuRegistroLogin {
             int opcion = this.sc.nextInt();
 
             if (opcion == 1) {
-                rolAsignado = "CLIENTE";
+                rolAsignado = "cliente";
                 seguir = false;
             } else if (opcion == 2) {
-                rolAsignado = "EMPLEADO";
+                rolAsignado = "empleado";
                 seguir = false;
             } else {
                 System.out.println("Opcion invalida. Por favor, ingrese una opcion valida");
@@ -194,8 +194,6 @@ public class MenuRegistroLogin {
 
         System.out.println("--------------------- LOGIN ---------------------");
 
-        // Ingreso el rol del Usuario
-        String rolUsuario = this.elegirRol().toLowerCase();
         // Ingreso el nombre de Usuario
         System.out.print("Nombre de usuario: ");
         String nombreUsuario = this.sc.next();
@@ -214,7 +212,7 @@ public class MenuRegistroLogin {
         String claveUsuario = this.sc.next();
 
         // Verifico que la contraseña sea correcta
-        boolean validarClave = this.validarClave(claveUsuario, rolUsuario);
+        boolean validarClave = this.validarClave(claveUsuario);
 
         if (validarClave) {
             System.out.println("Inicio de sesión exitoso. ¡Bienvenido!");
@@ -267,10 +265,16 @@ public class MenuRegistroLogin {
     }
 
     // Validar la contraseña
-    private boolean validarClave(String claveIngresada, String rolIngresado) {
+    private boolean validarClave(String claveIngresada) {
 
         // Parto con una premisa booleana
         boolean sonIguales = false;
+
+        for (Usuario usuario : listaUsuarios) {
+            if (claveIngresada.equals(usuario.getClaveUsuario())) {
+                sonIguales = true;
+            }
+        }
 
         // Devuelvo el valor final de la premisa
         return sonIguales;
