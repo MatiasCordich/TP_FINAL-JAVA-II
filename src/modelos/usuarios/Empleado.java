@@ -8,10 +8,10 @@ public class Empleado extends UsuarioBase {
         super(nombreUsuario, claveUsuario);
     }
 
-    // Implementación del método getRol para Cliente
+    // Implementación del método getTipoUsuario() para Empleado
     @Override
     public String getTipoUsuario() {
-        return "Empleado";
+        return "EMPLEADO";
     }
 
    

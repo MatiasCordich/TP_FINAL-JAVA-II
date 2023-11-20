@@ -23,7 +23,7 @@ public abstract class UsuarioBase implements Usuario {
         this.claveUsuario = claveUsuario;
     }
 
-    // Metodos de la interfaz
+    // Los getters se crearon como métodos implementados de la intefaz Usuario
     public String getNombreUsuario(){
         return this.nombreUsuario;
     };
@@ -32,7 +32,7 @@ public abstract class UsuarioBase implements Usuario {
         return this.claveUsuario;
     };
 
-    // Este meotdo sera implementado por las clases hijas
+    // Este metodo sera implementado por las clases hijas
     public abstract String getTipoUsuario();
 
     // Metodo toString()
