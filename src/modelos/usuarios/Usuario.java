@@ -1,6 +1,6 @@
-package modelos;
+package modelos.usuarios;
 
-public class Usuario {
+public abstract class Usuario {
 
     // Atributos 
     private String nombreUsuario;
