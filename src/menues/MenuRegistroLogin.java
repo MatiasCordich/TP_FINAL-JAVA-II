@@ -27,17 +27,17 @@ public class MenuRegistroLogin {
         System.out.println("BIENVENIDO AL SISTEMA DE ALTA DE USUARIO");
         System.out.println(" 1 - LOGIN");
         System.out.println(" 2 - REGISTRO");
-        System.out.print("Por favor, elija una de las siguientes opciones: ");
         System.out.println("---------------------------------------------");
+        System.out.print("Por favor, elija una de las siguientes opciones: ");
     }
 
     private void mostrarOpcionRoles() {
         System.out.println("---------------------------------------------");
-        System.out.print("Elija un rol eligiendo una de las opciones numericas: ");
+        System.out.println("Elija un rol eligiendo una de las opciones numericas: ");
         System.out.println(" 1 - CLIENTE");
         System.out.println(" 2 - EMPLEADO");
-        System.out.print("Por favor, elija uno de los roles: ");
         System.out.println("---------------------------------------------");
+        System.out.print("Por favor, elija uno de los roles: ");
     }
 
     public void iniciar() {
@@ -121,7 +121,7 @@ public class MenuRegistroLogin {
 
         // Reingreso la clave
         System.out.print("Ingrese la contraseña nuevamente: ");
-        String confirmarClave = this.sc.nextLine();
+        String confirmarClave = this.sc.next();
 
         // Valido si ambas claves ingresadas son iguales
         boolean sonIguales = this.validarClaves(claveIngresada, confirmarClave);
@@ -168,8 +168,7 @@ public class MenuRegistroLogin {
         String nombreUsuario = this.sc.next();
 
         // Ingreso el rol del Usuario
-        System.out.print("Rol del usuario: ");
-        String rolUsuario = this.elegirRol();
+        String rolUsuario = this.elegirRol().toLowerCase();
 
         // Valido que exista dicho usuario
         boolean existeUsuario = this.validarExistenciaUsuario(nombreUsuario, rolUsuario);
