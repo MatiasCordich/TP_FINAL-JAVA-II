@@ -18,5 +18,7 @@ public class Main {
 
         menu.iniciar();
 
+        sc.close();
+
     }
 }
