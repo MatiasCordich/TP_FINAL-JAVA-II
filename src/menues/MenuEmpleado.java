@@ -1,7 +1,8 @@
 package menues;
 
-import modelos.usuarios.Empleado;
 import java.util.Scanner;
+
+import modelos.usuarios.Empleado;
 
 public class MenuEmpleado {
     private boolean continuar = true;
