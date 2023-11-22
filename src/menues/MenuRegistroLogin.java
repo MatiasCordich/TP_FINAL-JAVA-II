@@ -234,8 +234,7 @@ public class MenuRegistroLogin {
             MenuCliente mCliente = new MenuCliente(sc, cliente);
             mCliente.iniciar();
         } else if (usuarioEncontrado instanceof Empleado) {
-            Empleado empleado = (Empleado) usuarioEncontrado;
-            MenuEmpleado mEmpleado = new MenuEmpleado(sc, empleado);
+            MenuEmpleado mEmpleado = new MenuEmpleado(sc);
             mEmpleado.iniciar();
         }
 

@@ -2,16 +2,13 @@ package menues;
 
 import java.util.Scanner;
 
-import modelos.usuarios.Empleado;
 
 public class MenuEmpleado {
     private boolean continuar = true;
     private Scanner sc;
-    private Empleado empleado;
 
-    public MenuEmpleado(Scanner sc, Empleado empleado) {
+    public MenuEmpleado(Scanner sc) {
         this.sc = sc;
-        this.empleado = empleado;
     }
 
     private void mostrarOpciones() {
