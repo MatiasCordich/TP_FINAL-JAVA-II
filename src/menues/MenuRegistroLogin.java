@@ -234,7 +234,8 @@ public class MenuRegistroLogin {
             MenuCliente mCliente = new MenuCliente(sc, cliente);
             mCliente.iniciar();
         } else if (usuarioEncontrado instanceof Empleado) {
-            MenuEmpleado mEmpleado = new MenuEmpleado(sc);
+            Empleado empleado = new Empleado(nombreUsuario, claveUsuario);
+            MenuEmpleado mEmpleado = new MenuEmpleado(sc, empleado);
             mEmpleado.iniciar();
         }
 
@@ -327,6 +328,7 @@ public class MenuRegistroLogin {
 
     // Funcio que me devuelve un Usuario
     private Usuario getUsuario(String nombreUsuario, String claveUsuario) {
+        // Usuario Encontrado
         Usuario usuarioEncontrado = null;
 
         for (Usuario usuario : listaUsuarios) {
