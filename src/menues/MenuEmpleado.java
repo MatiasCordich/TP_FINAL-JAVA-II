@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 import modelos.usuarios.Empleado;
 
+/*
+ * Menu empleados:
+ * ABM ARTICULOS: crear, editar, eliminar articulo. 
+ * Ver un listado completo de Articulos
+ * STOCK: ver y editar la cantidad de cada uno de los articulos
+ * 
+ */
+
 
 public class MenuEmpleado {
     private boolean continuar = true;

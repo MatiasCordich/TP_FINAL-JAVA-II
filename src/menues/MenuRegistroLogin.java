@@ -230,18 +230,29 @@ public class MenuRegistroLogin {
 
         // Dependiendo del usuario encontrado si es Cliente o Empleado ejecuto el menu correspondiente
         if (usuarioEncontrado instanceof Cliente) {
+
+            // Primero convierto ese Usuario en tipo Cliente
             Cliente cliente = (Cliente) usuarioEncontrado;
+
+            // Intancio el menu de cliente que recibe un Scaner y un Cliente
             MenuCliente mCliente = new MenuCliente(sc, cliente);
+
+            // Ejecutar la funcion iniciar() de MenuCLiente
             mCliente.iniciar();
         } else if (usuarioEncontrado instanceof Empleado) {
+
+            // Primero convierto ese Usuario en tipo Empleado
             Empleado empleado = new Empleado(nombreUsuario, claveUsuario);
+
+            // Instancio el menu de empleado que reciber el Scanner y el Empleado
             MenuEmpleado mEmpleado = new MenuEmpleado(sc, empleado);
+
+            // Ejecuto la funcion iniciar() de Menu Empleado
             mEmpleado.iniciar();
         }
 
         // MENU EMPLEADOS
-        // ABM ARTICULOS (crear, editar, eliminar articulos)
-        // STOCK (ver y editar la cantidad de articulos)
+        // A
         // MENU CLIENTE
         // CARRITO (mucho texto fijarse en el campus)
         // SALDO (agregar dinero a la cuenta, retirar dinero, transferir a otro usuario)

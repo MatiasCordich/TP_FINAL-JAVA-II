@@ -13,18 +13,64 @@ Fecha de entrega:
 
 El trabajo final es de un sistema de carga de artículos que posee las siguientes funcionalidades.
 
-1. ABM artículos: Cargar artículos, editarlos y eliminarlos.
-Los artículos deberán contener cuanto mínimo los siguientes datos: Código de Articulo, Nombre/descripción y precio.
+1. USUARIOS: 
+Se deberá en primer lugar ingresar con un usuario el cual, cuanto mínimo, posea:
+- Nombre de usuario
+- Una contraseña.
+Los usuarios pueden ser:
+- empleado 
+- cliente.
 
-2. Usuarios: Para utilizar el sistema, se deberá en primer lugar ingresar con un usuario el cual, cuanto mínimo, posea un nombre de usuario y una contraseña.
-Los mismos deberán ser catalogados en Cliente y Empleado.
-(Solo los empleados podrán acceder al ABM de Artículos).
+El sistema deberá permitir registrar usuarios.
 
-3. Carrito de compra: Se deberá poder ver el listado de artículos en el sistema, agregarlos a un carrito, calcular su precio total y generar una factura.
-Una vez terminada la venta, el usuario deberá poder completar la compra. La cantidad comprada, deberá verse reflejada automáticamente en el stock.
-(Se puede considerar una compra por parte del usuario, pero se trataría de una venta para la empresa que utiliza el sistema, el stock debería reducirse)
+Durante el registro, la calve debe ser solicitada dos veces y validar que coincida.
+Para registrar un empleado, el sistema deberá pedir la una clave extra, luego de ingresar los datos del mismo. La clave será “pepepiola123”. Esta clave solo sirve para registrar.
+Los clientes solo pueden acceder a las funcionalidades 4 y 5.
+ 
 
-4. Sección de Crédito: Contar con un gestor de dinero por cuenta, el cual permita agregar dinero, transferir y remover.
-A su vez, si se aplica este módulo, en caso de que el usuario realice una compra, el sistema deberá descontar el valor total de la misma al dinero que posee.
+2. ABM ARTÍCULOS: 
+Se deberá poder cargar artículos, editarlos y eliminarlos. También ver un listado completo.
 
-5. Stock: Se deberá llevar un control de la cantidad que hay de cada artículo en el sistema. Tener en cuenta que esto implica no poder vender mas de la cantidad que haya en existencias.
+Los artículos deberán contener, cuanto mínimo, los siguientes datos: 
+Código de Articulo: Identificador único de cada artículo (Se debe validar que no se repita)
+
+Nombre/descripción: Un texto descriptivo del artículo.
+
+Precio neto: El precio del artículo (Ya incluye IVA).
+
+Stock: La cantidad en existencia del mismo. 
+
+Rubro: A que rubro pertenece (Puede ser A, B o C).
+
+Cada grupo debe elegir un nombre para cada categoría, pero deberá tener el tipo al final de su nombre. 
+Ej: “Alimentos (A)”. (El nombre elegido no tiene que ser editable durante la ejecución del programa).
+
+Adicionalmente, los artículos tienen que pertenecer a uno de estos tres tipos:
+Subsidiados: Estos artículos deben tener un descuento en su precio final, dependiendo de a la categoría que pertenezcan. (A: 30%, B: 24%, C: 15%).
+ Estos artículos se deben mostrar con la leyenda “(S)” al final de su nombre.
+
+Por demanda: Estos artículos tienen un stock deseado, cuando se encuentran por arriba de este, deben aplicar un descuento basado en el porcentaje por el que se encuentran excedidos (Con un máximo de 50%).
+Ej: Si el deseado es 80 y el stock es 100, 100 es el 125% de 80, por ende el descuento a aplicar es 25%.
+
+Simples: No aplican ningún descuento.
+
+3. STOCK: 
+Se deberá poder ver y editar la cantidad de cada uno de los artículos cargados en el sistema.
+
+4. MÓDULO DE SALDO: 
+Cada usuario debe contar con una cantidad de saldo y debe poder realizar las siguientes tareas:
+Agregar dinero a la cuenta.
+Retirar dinero de la cuenta.
+Transferir dinero a otro usuario.
+
+5. CARRITO DE COMPRA: 
+El sistema debe permitir agregar artículos a un carrito de compras.
+Los mismos deberán ser agregados por código, para esto, se deberá mostrar el listado completo de artículos para saber cuál seleccionar.
+Se deberá poder agregar más de una vez un artículo.
+Se deberá poder ver el importe total de los artículos cargados en todo momento.
+Si el total de la compra es mayor a $12000 se deberá aplicar un descuento del 15%.
+Cuando el usuario desee finalizar, se deberá mostrar al usuario cuando se va a gastar y su saldo. En base a eso el mismo deberá confirmar la transacción.
+Si el usuario no   tiene saldo suficiente, no podrá concretar la compra. (Se le debe mostrar un error).
+Una vez finalizada la operación, se deberá mostrar por pantalla los artículos comprados, el subtotal, el importe total descontado y el total final.
+Adicionalmente, se deberán descontar los artículos del stock y se debe reducir el saldo del usuario en base al total de la factura.
+

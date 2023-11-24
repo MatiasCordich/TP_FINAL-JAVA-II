@@ -4,7 +4,23 @@ import java.util.Scanner;
 
 import modelos.usuarios.Cliente;
 
-
+/*
+ * SALDO:
+ *  - Agregar dinero
+ *  - Retirar dinero
+ *  - Transferir a otro usuario (lista de Usarios de tipo       cliente)
+ * 
+ * CARRITO DE COMPRA:
+ *  - Agregar articulos (lista de articulos): estos deben ser agregados por codigo y se debe mostrar el listado completo de articulos
+ *  - Se puede agregar mas de una vez
+ *  - Se podra ver el importae total de articulos cargados en el momento
+ *  - Si la compra es mayor a 12000 se aplicara un descuento del 15%
+ *  - Cuando el usuario desee finalizar se le ebe mostrar el usuario cuanto se va a gastar y su saldo. Debe confirmar la transaccion
+ * - Si el usuario no tiene saldo suficiente, no se podra concretar la compra
+ * - Finalizada la operacion se debera mostrar por pantalla los articulos comprados, el subtotal, el importe descontado y el total final
+ * - Se debera descontrar los articulos del stock y reducir el saldo del usuario en base a la factura
+ * 
+ */
 
 public class MenuCliente {
     private boolean continuar = true;
