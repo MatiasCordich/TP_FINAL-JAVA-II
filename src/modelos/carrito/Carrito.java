@@ -3,7 +3,7 @@ package modelos.carrito;
 import java.util.ArrayList;
 
 public class Carrito {
-     private ArrayList<Renglon> listaCompra;
+    private ArrayList<Renglon> listaCompra;
 
     public Carrito() {
         this.listaCompra = new ArrayList<>();
@@ -16,7 +16,8 @@ public class Carrito {
     public void verCarrito() {
         System.out.println("----- Carrito de Compras -----");
         for (Renglon renglon : listaCompra) {
-            System.out.println("Producto: " + renglon.getProducto().getNombre() + " - Cantidad: " + renglon.getCantidad());
+            System.out.println(
+                    "Producto: " + renglon.getProducto().getNombre() + " - Cantidad: " + renglon.getCantidad());
         }
         System.out.println("-------------------------------");
     }
@@ -41,4 +42,3 @@ public class Carrito {
     }
 
 }
-
