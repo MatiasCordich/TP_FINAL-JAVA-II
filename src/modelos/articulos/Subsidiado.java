@@ -2,6 +2,7 @@ package modelos.articulos;
 
 public class Subsidiado extends Articulo {
 
+    // Atributo de Subsidiado
     private double precio_final;
 
     // Constructor que herada los atributos de la clase abstracta
@@ -15,6 +16,7 @@ public class Subsidiado extends Articulo {
         this.precio_final = precio_final;
     }
 
+    // Metodo para aplicar el descuento en base al rubro
     private void setDescuento() {
 
         if (this.getRubro() == 'A') {
