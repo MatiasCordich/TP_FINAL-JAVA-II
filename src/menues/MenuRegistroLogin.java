@@ -1,5 +1,6 @@
 package menues;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,9 +53,23 @@ public class MenuRegistroLogin {
 
     // Funcion para elegir una opcion
     private int elegirOpcion() {
-        this.mostrarOpciones();
-        int opcion = this.sc.nextInt();
-        return opcion;
+
+        while (true) {
+            int opcion;
+            try {
+                this.mostrarOpciones();
+                opcion = this.sc.nextInt();
+                return opcion;
+
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UNA OPCIÓN NUMERICA");
+                System.out.println("----------------------------------------------");
+            }
+
+        }
+
     }
 
     // Funcion que sirve para elegir el rol ya sea para el registro como para el

@@ -1,7 +1,7 @@
 package menues;
 
 import java.util.Scanner;
-
+import java.util.InputMismatchException;
 import java.util.List;
 
 import modelos.carrito.Carrito;
@@ -61,11 +61,24 @@ public class MenuCliente {
     }
 
     private int elegirOpcion() {
-        this.mostrarOpciones();
-        int opcion = this.sc.nextInt();
-        return opcion;
-    }
 
+        while (true) {
+            int opcion;
+            try {
+                this.mostrarOpciones();
+                opcion = this.sc.nextInt();
+                return opcion;
+
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UNA OPCIÓN NUMERICA");
+                System.out.println("----------------------------------------------");
+            }
+
+        }
+
+    }
     private void realizarOpcion(int opcion) {
         switch (opcion) {
             case 0:

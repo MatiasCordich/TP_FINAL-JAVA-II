@@ -1,5 +1,6 @@
 package menues;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import modelos.usuarios.Empleado;
@@ -41,10 +42,24 @@ public class MenuEmpleado {
         }
     }
 
-    private int elegirOpcion() {
-        this.mostrarOpciones();
-        int opcion = this.sc.nextInt();
-        return opcion;
+   private int elegirOpcion() {
+
+        while (true) {
+            int opcion;
+            try {
+                this.mostrarOpciones();
+                opcion = this.sc.nextInt();
+                return opcion;
+
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UNA OPCIÓN NUMERICA");
+                System.out.println("----------------------------------------------");
+            }
+
+        }
+
     }
 
     private void finalizar() {
