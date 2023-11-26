@@ -12,7 +12,7 @@ import interfaces.Usuario;
  * SALDO:
  *  - Agregar dinero
  *  - Retirar dinero
- *  - Transferir a otro usuario (lista de Usarios de tipo       cliente)
+ *  - Transferir a otro usuario (lista de Usarios de tipo cliente)
  * 
  * CARRITO DE COMPRA:
  *  - Agregar articulos (lista de articulos): estos deben ser agregados por codigo y se debe mostrar el listado completo de articulos
@@ -33,14 +33,17 @@ public class MenuCliente {
     private Scanner sc;
     private Cliente cliente;
     private List<Usuario> listaUsuarios;
+    private Carrito carrito;
 
     // Constructor
     public MenuCliente(Scanner sc, Cliente cliente, List<Usuario> listaUsuarios) {
         this.sc = sc;
         this.cliente = cliente;
         this.listaUsuarios = listaUsuarios;
+        this.carrito = new Carrito();
     }
 
+    // --------------------------- GENERICOS ---------------------------
     private void mostrarOpciones() {
         System.out.println("---------------------------------------------");
         System.out.println("MENÚ DE OPCIONES - CLIENTE");
@@ -51,6 +54,16 @@ public class MenuCliente {
         System.out.println(" 4 - FINALIZAR COMPRA");
         System.out.println("---------------------------------------------");
         System.out.print("Por favor, elija una opción: ");
+    }
+
+    private void mostrarOpcionesSaldo() {
+        System.out.println("------------------- MODULO SALDO -------------------");
+        System.out.println("Elija una de las siguientes opciones: ");
+        System.out.println("1- AGREGAR DINERO");
+        System.out.println("2- RETIRAR DINERO");
+        System.out.println("3- TRANSFERIR A OTRO CLIENTE");
+        System.out.print("Opcion elegida: ");
+        System.out.println("----------------------------------------------------");
     }
 
     public void iniciar() {
@@ -79,6 +92,7 @@ public class MenuCliente {
         }
 
     }
+
     private void realizarOpcion(int opcion) {
         switch (opcion) {
             case 0:
@@ -112,6 +126,8 @@ public class MenuCliente {
         System.out.println("----------------------------------------------");
     }
 
+    // --------------------------- MODULO COMPRA ---------------------------
+
     // Funcion para realizar una compra
     private void comprar() {
         // Lógica para realizar compras
@@ -122,24 +138,45 @@ public class MenuCliente {
     private void verCarrito() {
         // Lógica para mostrar el carrito
         System.out.println("Has seleccionado la opción de VER CARRITO.");
+        carrito.verCarrito();
 
     }
+
+    private void finalizarCompra() {
+        // Lógica para finalizar la compra
+        double totalCompra = carrito.verSaldo(); // Método para calcular el total de la compra
+        // Faltaria agregar aca los descuentos.
+
+        System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
+        System.out.println("------------------------------------------------------------------------------");
+        carrito.verCarrito();
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("Total de la compra: " + totalCompra);
+
+        if (cliente.getSaldo() < totalCompra) {
+            System.out.println("------------------------------------------------------------------------------");
+            System.out.println("SALDO INSUFICIENTE. La compra no puede ser realizada.");
+            System.out.println("------------------------------------------------------------------------------");
+
+        }
+
+        cliente.setSaldo(cliente.getSaldo() - totalCompra);
+        System.out.println("Compra realizada con éxito. Saldo restante: " + cliente.getSaldo());
+
+        carrito.finalizarCompra();
+    }
+
+    // --------------------------- MODULO SALDO ---------------------------
 
     // Lógica para ver el saldo del cliente
     private void verSaldo() {
 
-        System.out.println("----------------------------------------------");
+        System.out.println("------------------- SALDO ACTUAL -------------------");
         System.out.println("Has seleccionado la opción de VER SALDO.");
-        System.out.println("Saldo actual: " + cliente.getSaldo());
-        System.out.println("----------------------------------------------");
-        System.out.println("Elija una de las siguientes opciones: ");
-        System.out.println("1- AGREGAR DINERO");
-        System.out.println("2- RETIRAR DINERO");
-        System.out.println("3- TRANSFERIR A OTRO CLIENTE");
-        System.out.print("Opcion elegida: ");
-        System.out.println("----------------------------------------------");
+        System.out.println("SALDO ACTUAL: " + cliente.getSaldo());
 
-        int opcion = sc.nextInt();
+        int opcion = this.elegirOpcionModuloSaldo();
+
         switch (opcion) {
             case 1:
                 this.agregarDinero();
@@ -150,6 +187,11 @@ public class MenuCliente {
             case 3:
                 this.transferirDinero();
                 break;
+            default:
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("OPCION INCORRECTA. Elija una opcion valida.");
+                System.out.println("------------------------------------------------------------------------------");
+                break;
         }
 
     }
@@ -157,31 +199,23 @@ public class MenuCliente {
     // Metodo que agrega dinero a la cuenta del cliente
     private void agregarDinero() {
 
-        boolean continuar = true;
+        double cantidadIngresada = this.ingresarSaldo();
 
-        while (continuar) {
-
-            System.out.println("Ingrese la cantidad de dinero a agregar:");
-            double cantidadIngresada = sc.nextDouble();
-
-            if (cantidadIngresada < 0) {
-                System.out.println("------------------------------------------------");
-                System.out.println("ERROR! Por favor, elija una cantidad correcta.");
-                System.out.println("-------------------------------------------------");
-                return;
-            }
-
-            this.cliente.setSaldo(cliente.getSaldo() + cantidadIngresada);
-
-            System.out.println(
-                    "----------------------------------------------------------------------------------------");
-            System.out.println(
-                    "Se agregó " + cantidadIngresada + " al saldo actual. SALDO ACTUAL: " + cliente.getSaldo());
-            System.out.println(
-                    "----------------------------------------------------------------------------------------");
-
-            continuar = false;
+        if (cantidadIngresada < 0) {
+            System.out.println("------------------------------------------------");
+            System.out.println("ERROR! Por favor, elija una cantidad correcta.");
+            System.out.println("-------------------------------------------------");
+            return;
         }
+
+        this.cliente.setSaldo(cliente.getSaldo() + cantidadIngresada);
+
+        System.out.println(
+                "----------------------------------------------------------------------------------------");
+        System.out.println(
+                "Se agregó " + cantidadIngresada + " al saldo actual. SALDO ACTUAL: " + cliente.getSaldo());
+        System.out.println(
+                "----------------------------------------------------------------------------------------");
 
     }
 
@@ -285,12 +319,7 @@ public class MenuCliente {
 
     }
 
-    private void finalizarCompra() {
-        // Lógica para finalizar la compra
-
-        System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
-
-    }
+    // Metodos del menu Cliente
 
     private Cliente validarExistenciaUsuario(String nombreIngresado) {
 
@@ -311,6 +340,42 @@ public class MenuCliente {
 
         // Devuelvo el valor final de la premisa
         return clienteEncontrado;
+    }
+
+    private double ingresarSaldo() {
+        while (true) {
+            double saldo;
+            try {
+                System.out.print("Ingrese la cantidad de dinero a agregar:");
+                saldo = this.sc.nextDouble();
+                return saldo;
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UN VALOR NUMERICO");
+                System.out.println("----------------------------------------------");
+            }
+        }
+    }
+
+    private int elegirOpcionModuloSaldo() {
+
+        while (true) {
+            int opcion;
+            try {
+                this.mostrarOpcionesSaldo();
+                opcion = this.sc.nextInt();
+                return opcion;
+
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UNA OPCIÓN NUMERICA");
+                System.out.println("----------------------------------------------");
+            }
+
+        }
+
     }
 
 }
