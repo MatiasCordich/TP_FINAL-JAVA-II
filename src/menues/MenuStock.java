@@ -64,6 +64,7 @@ public class MenuStock {
         return opcion;
     }
 
+    // Funcion para determinar el rubro del producto
     private char elegirRubro() {
 
         boolean seguir = true;
@@ -73,6 +74,8 @@ public class MenuStock {
 
         // Hago el bucle
         while (seguir) {
+
+            // Muestros las opciones
             this.mostrarOpcionRubros();
 
             // Variable que guarda mi eleccion
