@@ -4,8 +4,11 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.List;
 
+import modelos.articulos.Articulo;
 import modelos.carrito.Carrito;
+import modelos.carrito.Renglon;
 import modelos.usuarios.Cliente;
+import modelos.usuarios.Empleado;
 import interfaces.Usuario;
 
 /*
@@ -132,38 +135,63 @@ public class MenuCliente {
     private void comprar() {
         // Lógica para realizar compras
         System.out.println("Has seleccionado la opción de COMPRAR.");
-        // Aquí se implementa la lógica de compra utilizando el objeto cliente
+
+        this.verListaDeArticulos();
+
+        System.out.println("Ingrese el código del artículo que desea comprar (0 para salir):");
+        int codigoArticulo = this.ingresarCodigo();
+
+        while (codigoArticulo != 0) {
+
+            // Busca el artículo en la lista de artículos disponibles
+            Articulo articuloSeleccionado = buscarArticuloPorCodigo(codigoArticulo);
+
+            if (articuloSeleccionado == null) {
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("ERROR: El articulo no existe, intente ingresar un articulo existente ");
+                System.out.println("-----------------------------------------------------------------------");
+                return;
+            }
+
+            System.out.println("Ingrese la cantidad que desea comprar:");
+            int cantidadIngresada = sc.nextInt();
+
+            // Verifica si hay suficiente stock
+            if (articuloSeleccionado.getStock() < cantidadIngresada) {
+                System.out.println("--------------------------------------------");
+                System.out.println("ERROR: No hay suficiente stock disponible");
+                System.out.println("-----------------------------------------");
+                return;
+            }
+
+            // Agrega el artículo al carrito
+            Renglon productoAAgregar = new Renglon(cantidadIngresada, articuloSeleccionado);
+            carrito.agregar(productoAAgregar);
+
+            System.out.println("--------------------------------------------");
+            System.out.println("Producto agregado al carrito");
+            System.out.println("-----------------------------------------");
+
+            // Actualiza el stock del artículo en la lista de artículos disponibles
+            articuloSeleccionado.setStock(articuloSeleccionado.getStock() - cantidadIngresada);
+
+            // Vuelvo a preguntar para seguir o para terminar
+            System.out.println("Ingrese el código del siguiente artículo que desea comprar (0 para salir):");
+            codigoArticulo = sc.nextInt();
+        }
+
     }
 
     private void verCarrito() {
-        // Lógica para mostrar el carrito
+        
         System.out.println("Has seleccionado la opción de VER CARRITO.");
         carrito.verCarrito();
 
     }
 
     private void finalizarCompra() {
-        // Lógica para finalizar la compra
-        double totalCompra = carrito.verSaldo(); // Método para calcular el total de la compra
-        // Faltaria agregar aca los descuentos.
-
-        System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
-        System.out.println("------------------------------------------------------------------------------");
-        carrito.verCarrito();
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("Total de la compra: " + totalCompra);
-
-        if (cliente.getSaldo() < totalCompra) {
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("SALDO INSUFICIENTE. La compra no puede ser realizada.");
-            System.out.println("------------------------------------------------------------------------------");
-
-        }
-
-        cliente.setSaldo(cliente.getSaldo() - totalCompra);
-        System.out.println("Compra realizada con éxito. Saldo restante: " + cliente.getSaldo());
-
-        carrito.finalizarCompra();
+         System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
+        carrito.finalizarCompra(cliente, listaUsuarios);
     }
 
     // --------------------------- MODULO SALDO ---------------------------
@@ -195,6 +223,8 @@ public class MenuCliente {
         }
 
     }
+
+    // --------------------------- METODOS DEL MENU CLIENTE ---------------------------
 
     // Metodo que agrega dinero a la cuenta del cliente
     private void agregarDinero() {
@@ -281,8 +311,8 @@ public class MenuCliente {
         // Si me devuelve un Cliente, procedo con la transferencia
 
         // Ingreso la cantidad a transferir
-        System.out.print("Ingrese la cantidad a transferir:");
-        double cantidadTransferir = sc.nextDouble();
+        
+        double cantidadTransferir = this.ingresarCantidad();
 
         // Valido que la cantidad a transferir sea positiva
 
@@ -378,4 +408,77 @@ public class MenuCliente {
 
     }
 
+    private int ingresarCodigo() {
+
+        while (true) {
+            int codigoIngresado;
+            try {
+                codigoIngresado = this.sc.nextInt();
+                return codigoIngresado;
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UN VALOR NUMERICO");
+                System.out.println("----------------------------------------------");
+            }
+        }
+
+    }
+
+    private void verListaDeArticulos() {
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario instanceof Empleado) {
+                List<Articulo> listaArticulos = ((Empleado) usuario).getListaDeArticulos();
+                System.out.println("--------------------------------------------------------");
+                for (Articulo articulo : listaArticulos) {
+                    System.out.println("CODIGO: " + articulo.getId_articulo());
+                    System.out.println("NOMBRE: " + articulo.getNombre());
+                    System.out.println("PRECIO: " + articulo.calcularPrecioFinal());
+                    System.out.println("STOCK: " + articulo.getStock());
+                }
+                System.out.println("--------------------------------------------------------");
+            }
+        }
+    }
+
+    private Articulo buscarArticuloPorCodigo(int codigoIngresado) {
+
+        Articulo articuloEcontrado = null;
+
+        // Lógica para buscar un artículo por su código
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario instanceof Empleado) {
+                // Obtener la lista de artículos del empleado
+                List<Articulo> articulosDisponibles = ((Empleado) usuario).getListaDeArticulos();
+
+                // Buscar el artículo por su código
+                for (Articulo articulo : articulosDisponibles) {
+                    if (articulo.getId_articulo() == codigoIngresado) {
+                        articuloEcontrado = articulo;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return articuloEcontrado;
+    }
+
+    private double ingresarCantidad(){
+        while (true) {
+            double cantidadIngresada;
+            try {
+                System.out.print("Ingrese la cantidad a transferir:");
+                cantidadIngresada = this.sc.nextDouble();
+                return cantidadIngresada;
+
+            } catch (InputMismatchException e) {
+                this.sc.nextLine();
+                System.out.println("----------------------------------------------");
+                System.out.println("ERROR: INGRESE UNA OPCIÓN NUMERICA");
+                System.out.println("----------------------------------------------");
+            }
+
+        }
+    }
 }
