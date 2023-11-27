@@ -154,7 +154,7 @@ public class MenuCliente {
             }
 
             System.out.println("Ingrese la cantidad que desea comprar:");
-            int cantidadIngresada = sc.nextInt();
+            int cantidadIngresada = sc.nextInt(); // HACER LA VALIDACION DE TIPO DE DATO 
 
             // Verifica si hay suficiente stock
             if (articuloSeleccionado.getStock() < cantidadIngresada) {
@@ -166,14 +166,14 @@ public class MenuCliente {
 
             // Agrega el artículo al carrito
             Renglon productoAAgregar = new Renglon(cantidadIngresada, articuloSeleccionado);
-            carrito.agregar(productoAAgregar);
+
+            this.carrito.agregar(productoAAgregar);
 
             System.out.println("--------------------------------------------");
             System.out.println("Producto agregado al carrito");
-            System.out.println("-----------------------------------------");
+            System.out.println("--------------------------------------------");
 
-            // Actualiza el stock del artículo en la lista de artículos disponibles
-            articuloSeleccionado.setStock(articuloSeleccionado.getStock() - cantidadIngresada);
+            
 
             // Vuelvo a preguntar para seguir o para terminar
             System.out.println("Ingrese el código del siguiente artículo que desea comprar (0 para salir):");
@@ -190,7 +190,7 @@ public class MenuCliente {
     }
 
     private void finalizarCompra() {
-         System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
+        System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
         carrito.finalizarCompra(cliente, listaUsuarios);
     }
 
@@ -254,7 +254,7 @@ public class MenuCliente {
 
         // Ingreso un monto a retirar
         System.out.print("Ingrese la cantidad de dinero a retirar: ");
-        double cantidadARetirar = sc.nextDouble();
+        double cantidadARetirar = this.ingresarSaldo();
 
         // Validaciones de la cantidad ingresada
 
@@ -270,7 +270,7 @@ public class MenuCliente {
         // ingresada
         if (this.cliente.getSaldo() < cantidadARetirar) {
             System.out.println("------------------------------------------------");
-            System.out.println("SALDO INSUFICIENTE para relaizar la operacion");
+            System.out.println("SALDO INSUFICIENTE para realizar la operacion");
             System.out.println("-------------------------------------------------");
             return;
         }
@@ -291,7 +291,7 @@ public class MenuCliente {
 
         // Ingreso el nombre del destinatario
         System.out.println("Ingrese el nombre del destinatario:");
-        String nombreDestinatario = sc.next();
+        String nombreDestinatario = sc.next(); // VALIDAR QUE ESTO SEA UN STRING
 
         // Verifico si exisnte un destinatario y guardo el resultado en una varaible de
         // tipo Cliente

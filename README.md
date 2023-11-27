@@ -47,7 +47,7 @@ Ej: “Alimentos (A)”. (El nombre elegido no tiene que ser editable durante la
 
 Adicionalmente, los artículos tienen que pertenecer a uno de estos tres tipos:
 Subsidiados: Estos artículos deben tener un descuento en su precio final, dependiendo de a la categoría que pertenezcan. (A: 30%, B: 24%, C: 15%).
- Estos artículos se deben mostrar con la leyenda “(S)” al final de su nombre.
+Estos artículos se deben mostrar con la leyenda “(S)” al final de su nombre.
 
 Por demanda: Estos artículos tienen un stock deseado, cuando se encuentran por arriba de este, deben aplicar un descuento basado en el porcentaje por el que se encuentran excedidos (Con un máximo de 50%).
 Ej: Si el deseado es 80 y el stock es 100, 100 es el 125% de 80, por ende el descuento a aplicar es 25%.
@@ -70,7 +70,7 @@ Se deberá poder agregar más de una vez un artículo.
 Se deberá poder ver el importe total de los artículos cargados en todo momento.
 Si el total de la compra es mayor a $12000 se deberá aplicar un descuento del 15%.
 Cuando el usuario desee finalizar, se deberá mostrar al usuario cuando se va a gastar y su saldo. En base a eso el mismo deberá confirmar la transacción.
-Si el usuario no   tiene saldo suficiente, no podrá concretar la compra. (Se le debe mostrar un error).
+Si el usuario no tiene saldo suficiente, no podrá concretar la compra. (Se le debe mostrar un error).
 Una vez finalizada la operación, se deberá mostrar por pantalla los artículos comprados, el subtotal, el importe total descontado y el total final.
 Adicionalmente, se deberán descontar los artículos del stock y se debe reducir el saldo del usuario en base al total de la factura.
 
