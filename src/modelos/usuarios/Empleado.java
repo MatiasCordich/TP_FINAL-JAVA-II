@@ -10,12 +10,12 @@ public class Empleado extends UsuarioBase {
     private ArrayList<Articulo> listaArticulos;
 
     // Constructor de la clase Empleado que herada el super() de la clase padre
-    // Usuario
     public Empleado(String nombreUsuario, String claveUsuario) {
         super(nombreUsuario, claveUsuario);
         this.listaArticulos = new ArrayList<>();
     }
 
+    // ---------------- Getters ----------------
     public ArrayList<Articulo> getListaDeArticulos() {
         return this.listaArticulos;
     }
@@ -26,7 +26,7 @@ public class Empleado extends UsuarioBase {
         return "EMPLEADO";
     }
 
-    // ---------------- Metodos para el ABM articulos ----------------
+    // ---------------- Metodos para el ABM articulos que hace el Empleado ----------------
 
     // Agregar Articulo
     public void agregarArticulo(Articulo nuevoArticulo) {
@@ -44,6 +44,7 @@ public class Empleado extends UsuarioBase {
     public void eliminarArticulo(int codigoArticulo) {
         listaArticulos.removeIf(articulo -> articulo.getId_articulo() == codigoArticulo);
     }
+
 
     @Override
     public String toString() {

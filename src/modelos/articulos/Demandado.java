@@ -16,7 +16,7 @@ public class Demandado extends Articulo {
         return this.stockDeseado;
     }
 
-    // Metodos abstractos
+    // ---------------- Metodos abstractos sobrescritos ----------------
     @Override
     public double calcularPrecioFinal() {
 

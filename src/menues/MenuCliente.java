@@ -48,6 +48,8 @@ public class MenuCliente {
     }
 
     // --------------------------- GENERICOS ---------------------------
+
+    // Mostrar opciones del menu Cliente
     private void mostrarOpciones() {
         System.out.println("---------------------------------------------");
         System.out.println("MENÚ DE OPCIONES - CLIENTE");
@@ -60,6 +62,7 @@ public class MenuCliente {
         System.out.print("Por favor, elija una opción: ");
     }
 
+    // Mostrar opcones del modulo Saldo
     private void mostrarOpcionesSaldo() {
         System.out.println("------------------- MODULO SALDO -------------------");
         System.out.println("Elija una de las siguientes opciones: ");
@@ -70,6 +73,7 @@ public class MenuCliente {
         System.out.println("----------------------------------------------------");
     }
 
+    // Iniciar el menu
     public void iniciar() {
         while (continuar) {
             int opcion = this.elegirOpcion();
@@ -77,6 +81,7 @@ public class MenuCliente {
         }
     }
 
+    // Elegir opcion
     private int elegirOpcion() {
 
         while (true) {
@@ -97,6 +102,7 @@ public class MenuCliente {
 
     }
 
+    // Funcio que aplica la logica de las funciones del Menu
     private void realizarOpcion(int opcion) {
         switch (opcion) {
             case 0:
@@ -180,6 +186,7 @@ public class MenuCliente {
 
     }
 
+    // Funcion para ver el Carrito de compra
     private void verCarrito() {
 
         System.out.println("Has seleccionado la opción de VER CARRITO.");
@@ -187,6 +194,7 @@ public class MenuCliente {
 
     }
 
+    // Funcion para finalizar la compra
     private void finalizarCompra() {
         System.out.println("Has seleccionado la opción de FINALIZAR COMPRA.");
         carrito.finalizarCompra(cliente, listaUsuarios);
@@ -347,6 +355,7 @@ public class MenuCliente {
 
     // --------------------------- METODOS DEL MENU CLIENTE ---------------------------
    
+    // Validacion para confiar la existencia del Usaurio
     private Cliente validarExistenciaUsuario(String nombreIngresado) {
 
         // Parto con una premisa booleana
@@ -368,6 +377,7 @@ public class MenuCliente {
         return clienteEncontrado;
     }
 
+    // Funcino que valida que el valor ingresado sea un numero de tipo double
     private double ingresarSaldo() {
         while (true) {
             double saldo;
@@ -384,6 +394,7 @@ public class MenuCliente {
         }
     }
 
+    // Funcion que valida que el valor ingresado sea un numero
     private int elegirOpcionModuloSaldo() {
 
         while (true) {
@@ -404,6 +415,7 @@ public class MenuCliente {
 
     }
 
+    // Funcino que valida que el ingreso del Código sea un numero
     private int ingresarCodigo() {
 
         while (true) {
@@ -422,6 +434,7 @@ public class MenuCliente {
 
     }
 
+    // Función para ver la lista de articulos
     private void verListaDeArticulos() {
         for (Usuario usuario : listaUsuarios) {
             if (usuario instanceof Empleado) {
@@ -438,6 +451,7 @@ public class MenuCliente {
         }
     }
 
+    // Funci que busca un articulo por su codigo de identificacion
     private Articulo buscarArticuloPorCodigo(int codigoIngresado) {
 
         Articulo articuloEcontrado = null;
@@ -461,6 +475,7 @@ public class MenuCliente {
         return articuloEcontrado;
     }
 
+    // Funcio que valida que el valor ingresado para cantidad sea un numero
     private double ingresarCantidad() {
         while (true) {
             double cantidadIngresada;

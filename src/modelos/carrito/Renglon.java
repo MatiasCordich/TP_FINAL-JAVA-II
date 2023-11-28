@@ -16,6 +16,7 @@ public class Renglon {
         this.producto = producto;
     }
 
+    // ---------------- Getters y Setters propios de la clase ----------------
     public int getCantidad() {
         return cantidad;
     }
@@ -32,6 +33,7 @@ public class Renglon {
         this.producto = producto;
     }
 
+    // ---------------- Metodos de la clase Renglon ----------------
     public double calcularPrecioTotal() {
         double precioTotal = this.cantidad * this.producto.getPrecio_neto();
         return precioTotal;
