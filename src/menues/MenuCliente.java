@@ -1,6 +1,7 @@
 package menues;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
@@ -424,7 +425,7 @@ public class MenuCliente {
     private void verListaDeArticulos() {
         for (Usuario usuario : listaUsuarios) {
             if (usuario instanceof Empleado) {
-                List<Articulo> listaArticulos = ((Empleado) usuario).getListaDeArticulos();
+                ArrayList<Articulo> listaArticulos = ((Empleado) usuario).getListaDeArticulos();
                 System.out.println("--------------------------------------------------------");
                 for (Articulo articulo : listaArticulos) {
                     System.out.println("CODIGO: " + articulo.getId_articulo());
@@ -445,7 +446,7 @@ public class MenuCliente {
         for (Usuario usuario : listaUsuarios) {
             if (usuario instanceof Empleado) {
                 // Obtener la lista de artículos del empleado
-                List<Articulo> articulosDisponibles = ((Empleado) usuario).getListaDeArticulos();
+                ArrayList<Articulo> articulosDisponibles = ((Empleado) usuario).getListaDeArticulos();
 
                 // Buscar el artículo por su código
                 for (Articulo articulo : articulosDisponibles) {
