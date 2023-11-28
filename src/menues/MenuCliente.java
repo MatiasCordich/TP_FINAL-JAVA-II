@@ -44,7 +44,7 @@ public class MenuCliente {
         this.sc = sc;
         this.cliente = cliente;
         this.listaUsuarios = listaUsuarios;
-        this.carrito = new Carrito();
+        this.carrito = new Carrito(sc);
     }
 
     // --------------------------- GENERICOS ---------------------------

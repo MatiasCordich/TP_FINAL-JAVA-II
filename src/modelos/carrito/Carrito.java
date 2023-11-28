@@ -13,12 +13,13 @@ import modelos.usuarios.Empleado;
 public class Carrito {
 
     // Atributos
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
     private ArrayList<Renglon> listaCompra;
 
     // Constructor
-    public Carrito() {
+    public Carrito(Scanner sc) {
         this.listaCompra = new ArrayList<>();
+        this.sc = sc;
     }
 
     // ---------------- Metodos de la clase Carrito ----------------
