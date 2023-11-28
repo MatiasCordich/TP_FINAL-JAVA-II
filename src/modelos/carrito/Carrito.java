@@ -101,6 +101,7 @@ public class Carrito {
                     System.out.println("CODIGO: " + articulo.getId_articulo());
                     System.out.println("NOMBRE: " + articulo.getNombre());
                     System.out.println("PRECIO UNITARIO: " + articulo.calcularPrecioFinal());
+                    System.out.println("RUBRO: " + articulo.getInfoRubro());
                     System.out.println("PRECIO TOTAL: " + renglon.calcularPrecioTotal());
                 }
 
