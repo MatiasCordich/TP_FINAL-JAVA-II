@@ -42,11 +42,10 @@ public class Carrito {
         for (Renglon renglon : listaCompra) {
             Articulo producto = renglon.getProducto();
             int cantidad = renglon.getCantidad();
-            System.out.println("CANTIDAD: " + cantidad);
-            System.out.println("CODIGO: " + producto.getId_articulo());
-            System.out.println("NOMBRE: " + producto.getNombre());
-            System.out.println("PRECIO UNITARIO: " + producto.calcularPrecioFinal());
-            System.out.println("PRECIO TOTAL: " + renglon.calcularPrecioTotal());
+            System.out.println("[" + " CANTIDAD: " + cantidad + " ] [ " + "ID: " + producto.getId_articulo()
+                            + ", NOMBRE: " + producto.getNombre() + ", PRECIO-UNITARIO: " + producto.calcularPrecioFinal()
+                            + ", RUBRO: " + producto.getInfoRubro() + ", PRECIO TOTAL: "
+                            + producto.calcularPrecioFinal() + " ]");
         }
         System.out.println("TOTAL A PAGAR: " + this.verMontoTotal());
         System.out.println("----------------------------------------------------");
@@ -90,6 +89,7 @@ public class Carrito {
         System.out.println("Desea finalizar la compra?");
         System.out.println("1 - SI");
         System.out.println("2 - NO");
+        System.out.print("Elija una opcion, por favor: ");
         int opcion = this.elegirOpcionFinalizarCompra();
 
         switch (opcion) {
@@ -97,17 +97,21 @@ public class Carrito {
                 System.out.println("----------------------------- FACTURA DE COMPRA -----------------------------");
 
                 // Muestra los detalles de cada artículo en el carrito
+                double totalAPagar = 0;
                 for (Renglon renglon : listaCompra) {
                     Articulo articulo = renglon.getProducto();
                     int cantidad = renglon.getCantidad();
 
-                    System.out.println("CANTIDAD: " + cantidad);
-                    System.out.println("CODIGO: " + articulo.getId_articulo());
-                    System.out.println("NOMBRE: " + articulo.getNombre());
-                    System.out.println("PRECIO UNITARIO: " + articulo.calcularPrecioFinal());
-                    System.out.println("RUBRO: " + articulo.getInfoRubro());
-                    System.out.println("PRECIO TOTAL: " + renglon.calcularPrecioTotal());
+                    System.out.println("[" + " CANTIDAD: " + cantidad + " ] [ " + "ID: " + articulo.getId_articulo()
+                            + ", NOMBRE: " + articulo.getNombre() + ", PRECIO-UNITARIO: " + articulo.calcularPrecioFinal()
+                            + ", RUBRO: " + articulo.getInfoRubro() + ", PRECIO TOTAL: "
+                            + articulo.calcularPrecioFinal() + " ]");
+
+                    totalAPagar = renglon.calcularPrecioTotal();
+
                 }
+
+                System.out.println("PRECIO TOTAL: " + totalAPagar);
 
                 System.out.println("------------------------------------------------------------------------------");
 

@@ -69,8 +69,8 @@ public class MenuCliente {
         System.out.println("1- AGREGAR DINERO");
         System.out.println("2- RETIRAR DINERO");
         System.out.println("3- TRANSFERIR A OTRO CLIENTE");
-        System.out.print("Opcion elegida: ");
         System.out.println("----------------------------------------------------");
+        System.out.print("Opcion elegida: ");
     }
 
     // Iniciar el menu
@@ -142,7 +142,7 @@ public class MenuCliente {
     private void comprar() {
         // Lógica para realizar compras
         System.out.println("Has seleccionado la opción de COMPRAR.");
-
+        System.out.println("--------------------------------------------------");
         for (Usuario usuario : listaUsuarios) {
             if (usuario instanceof Empleado) {
                 Empleado empleado = (Empleado) usuario;
@@ -150,7 +150,9 @@ public class MenuCliente {
                     empleado.mostrarArticulo(articulo);
                 }
             }
-        };
+        }
+        System.out.println("--------------------------------------------------");
+        
 
         int codigoArticulo = this.ingresarCodigo();
 
@@ -166,7 +168,7 @@ public class MenuCliente {
                 return;
             }
 
-            System.out.println("Ingrese la cantidad que desea comprar:");
+            System.out.print("Ingrese la cantidad que desea comprar:");
             int cantidadIngresada = sc.nextInt(); // HACER LA VALIDACION DE TIPO DE DATO
 
             // Verifica si hay suficiente stock
@@ -187,7 +189,7 @@ public class MenuCliente {
             System.out.println("--------------------------------------------");
 
             // Vuelvo a preguntar para seguir o para terminar
-            System.out.println("Ingrese el código del siguiente artículo que desea comprar (0 para salir):");
+            System.out.print("Ingrese el código del siguiente artículo que desea comprar (0 para salir):");
             codigoArticulo = sc.nextInt();
         }
 
@@ -301,7 +303,7 @@ public class MenuCliente {
     private void transferirDinero() {
 
         // Ingreso el nombre del destinatario
-        System.out.println("Ingrese el nombre del destinatario:");
+        System.out.print("Ingrese el nombre del destinatario:");
         String nombreDestinatario = sc.next(); // VALIDAR QUE ESTO SEA UN STRING
 
         // Verifico si exisnte un destinatario y guardo el resultado en una varaible de
@@ -360,8 +362,9 @@ public class MenuCliente {
 
     }
 
-    // --------------------------- METODOS DEL MENU CLIENTE ---------------------------
-   
+    // --------------------------- METODOS DEL MENU CLIENTE
+    // ---------------------------
+
     // Validacion para confiar la existencia del Usaurio
     private Cliente validarExistenciaUsuario(String nombreIngresado) {
 
@@ -428,7 +431,7 @@ public class MenuCliente {
         while (true) {
             int codigoIngresado;
             try {
-                System.out.print("Ingrese el código del artículo que desea comprar (0 para salir):");
+                System.out.print("Ingrese el código del artículo que desea comprar (0 para salir): ");
                 codigoIngresado = this.sc.nextInt();
                 return codigoIngresado;
             } catch (InputMismatchException e) {
@@ -440,8 +443,6 @@ public class MenuCliente {
         }
 
     }
-
-   
 
     // Funci que busca un articulo por su codigo de identificacion
     private Articulo buscarArticuloPorCodigo(int codigoIngresado) {
