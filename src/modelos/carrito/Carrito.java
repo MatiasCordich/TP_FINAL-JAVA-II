@@ -43,8 +43,8 @@ public class Carrito {
             Articulo producto = renglon.getProducto();
             int cantidad = renglon.getCantidad();
             System.out.println("[" + " CANTIDAD: " + cantidad + " ] [ " + "ID: " + producto.getId_articulo()
-                            + ", NOMBRE: " + producto.getNombre() + ", PRECIO-UNITARIO: " + producto.calcularPrecioFinal()
-                            + ", RUBRO: " + producto.getInfoRubro() + ", PRECIO TOTAL: "
+                            + ", NOMBRE: " + producto.getNombre() + ", PRECIO (sin descuento): " + producto.getPrecio_neto()
+                            + ", RUBRO: " + producto.getInfoRubro() + ", PRECIO FINAL (con descuento): "
                             + producto.calcularPrecioFinal() + " ]");
         }
         System.out.println("TOTAL A PAGAR: " + this.verMontoTotal());
@@ -103,15 +103,15 @@ public class Carrito {
                     int cantidad = renglon.getCantidad();
 
                     System.out.println("[" + " CANTIDAD: " + cantidad + " ] [ " + "ID: " + articulo.getId_articulo()
-                            + ", NOMBRE: " + articulo.getNombre() + ", PRECIO-UNITARIO: " + articulo.calcularPrecioFinal()
-                            + ", RUBRO: " + articulo.getInfoRubro() + ", PRECIO TOTAL: "
-                            + articulo.calcularPrecioFinal() + " ]");
+                            + ", NOMBRE: " + articulo.getNombre() + ", PRECIO-UNITARIO: " + articulo.getPrecio_neto()
+                            + ", RUBRO: " + articulo.getInfoRubro() + ", PRECIO FINAL: "
+                            + articulo.calcularPrecioFinal() + "  ] ");
 
-                    totalAPagar = renglon.calcularPrecioTotal();
+                    totalAPagar = this.verMontoTotal();
 
                 }
 
-                System.out.println("PRECIO TOTAL: " + totalAPagar);
+                System.out.println("TOTAL A PAGAR: " + totalAPagar);
 
                 System.out.println("------------------------------------------------------------------------------");
 

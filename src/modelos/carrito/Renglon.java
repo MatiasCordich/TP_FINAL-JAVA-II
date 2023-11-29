@@ -35,7 +35,7 @@ public class Renglon {
 
     // ---------------- Metodos de la clase Renglon ----------------
     public double calcularPrecioTotal() {
-        double precioTotal = this.cantidad * this.producto.getPrecio_neto();
+        double precioTotal = this.cantidad * this.producto.calcularPrecioFinal();
         return precioTotal;
     }
 
