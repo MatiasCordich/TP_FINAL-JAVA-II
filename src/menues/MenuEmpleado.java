@@ -49,6 +49,7 @@ public class MenuEmpleado {
     private void mostrarOpcinesTipoDeArticulo() {
 
         System.out.println("---------------------------------------------");
+        System.out.println("Ingrese un tipo de articulo");
         System.out.println(" 1 - SUBSIDIADO");
         System.out.println(" 2 - DEMANDADO");
         System.out.println(" 3 - SIMPLE");
@@ -129,8 +130,7 @@ public class MenuEmpleado {
     }
 
     private void verListadoArticulos() {
-        System.out.println("Has seleccionado la opción de VER LISTADO DE ARTICULOS.");
-
+    
         if (this.listaArticulos == null) {
             System.out.println("----------------------------------------------");
             System.out.println("ERROR: NO HAY ARTICULOS EN LA LISTA");
@@ -188,6 +188,7 @@ public class MenuEmpleado {
         // Si paso la validacion sigo con el registro del Articulo
 
         System.out.println("--------------------------------------.");
+        System.out.print("Ingrese el precio del articulo: ");
         double precioNetoIngresado = this.ingresarPrecioNeto();
         System.out.println("--------------------------------------.");
         System.out.print("Ingrese el stock del articulo: ");
@@ -203,6 +204,7 @@ public class MenuEmpleado {
         }
 
         System.out.println("--------------------------------------.");
+        
         int tipoIngresado = this.ingresarTipoDeArticulo();
 
         Articulo nuevoArticulo;
@@ -287,7 +289,7 @@ public class MenuEmpleado {
         }
 
         System.out.println("------------------------- ARTICULO ENCONTRADO -------------------------");
-        articuloEncontrado.toString();
+        empleado.mostrarArticulo(articuloEncontrado);
         System.out.println("-----------------------------------------------------------------------");
 
         int opcion = this.ingresarOpcionEditar();
@@ -320,7 +322,7 @@ public class MenuEmpleado {
                     return;
                 }
 
-                System.out.print("Nuevo precio neto: ");
+                System.out.print("Nuevo precio: ");
                 double nuevoPrecio = this.ingresarPrecioNeto();
 
                 System.out.print("Nuevo rubro: ");
@@ -451,7 +453,6 @@ public class MenuEmpleado {
         while (true) {
             double precioNeto = 0;
             try {
-                System.out.print("Ingrese el precio neto del artículo: ");
                 precioNeto = this.sc.nextDouble();
                 return precioNeto;
             } catch (NumberFormatException e) {
