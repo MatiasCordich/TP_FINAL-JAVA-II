@@ -66,6 +66,7 @@ public class MenuCliente {
     private void mostrarOpcionesSaldo() {
         System.out.println("------------------- MODULO SALDO -------------------");
         System.out.println("Elija una de las siguientes opciones: ");
+        System.out.println("0- SALIR");
         System.out.println("1- AGREGAR DINERO");
         System.out.println("2- RETIRAR DINERO");
         System.out.println("3- TRANSFERIR A OTRO CLIENTE");
@@ -152,7 +153,6 @@ public class MenuCliente {
             }
         }
         System.out.println("--------------------------------------------------");
-        
 
         int codigoArticulo = this.ingresarCodigo();
 
@@ -213,28 +213,35 @@ public class MenuCliente {
 
     // Lógica para ver el saldo del cliente
     private void verSaldo() {
-
         System.out.println("------------------- SALDO ACTUAL -------------------");
         System.out.println("Has seleccionado la opción de VER SALDO.");
         System.out.println("SALDO ACTUAL: " + cliente.getSaldo());
 
-        int opcion = this.elegirOpcionModuloSaldo();
+        boolean continuar = true;
 
-        switch (opcion) {
-            case 1:
-                this.agregarDinero();
-                break;
-            case 2:
-                this.retirarDinero();
-                break;
-            case 3:
-                this.transferirDinero();
-                break;
-            default:
-                System.out.println("------------------------------------------------------------------------------");
-                System.out.println("OPCION INCORRECTA. Elija una opcion valida.");
-                System.out.println("------------------------------------------------------------------------------");
-                break;
+        while (continuar) {
+            int opcion = this.elegirOpcionModuloSaldo();
+            switch (opcion) {
+                case 1:
+                    this.agregarDinero();
+                    break;
+                case 2:
+                    this.retirarDinero();
+                    break;
+                case 3:
+                    this.transferirDinero();
+                    break;
+                case 0:
+                    continuar = false;
+                    break;
+                default:
+                    System.out
+                            .println("------------------------------------------------------------------------------");
+                    System.out.println("OPCION INCORRECTA. Elija una opcion valida.");
+                    System.out
+                            .println("------------------------------------------------------------------------------");
+                    break;
+            }
         }
 
     }
