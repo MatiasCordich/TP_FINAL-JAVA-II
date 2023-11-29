@@ -3,7 +3,7 @@ package modelos.articulos;
 public class Subsidiado extends Articulo {
 
     // Constructor
-    public Subsidiado(int id_articulo, String nombre, double precio_neto, int stock, char rubro) {
+    public Subsidiado(int id_articulo, String nombre, double precio_neto, int stock, int tipoIngresado, char rubro) {
         super(id_articulo, nombre, precio_neto, stock, rubro);
     }
 

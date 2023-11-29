@@ -143,7 +143,14 @@ public class MenuCliente {
         // Lógica para realizar compras
         System.out.println("Has seleccionado la opción de COMPRAR.");
 
-        this.verListaDeArticulos();
+        for (Usuario usuario : listaUsuarios) {
+            if (usuario instanceof Empleado) {
+                Empleado empleado = (Empleado) usuario;
+                for (Articulo articulo : empleado.getListaArticulos()) {
+                    empleado.mostrarArticulo(articulo);
+                }
+            }
+        };
 
         int codigoArticulo = this.ingresarCodigo();
 
@@ -434,22 +441,7 @@ public class MenuCliente {
 
     }
 
-    // Función para ver la lista de articulos
-    private void verListaDeArticulos() {
-        for (Usuario usuario : listaUsuarios) {
-            if (usuario instanceof Empleado) {
-                ArrayList<Articulo> listaArticulos = ((Empleado) usuario).getListaDeArticulos();
-                System.out.println("--------------------------------------------------------");
-                for (Articulo articulo : listaArticulos) {
-                    System.out.println("CODIGO: " + articulo.getId_articulo());
-                    System.out.println("NOMBRE: " + articulo.getNombre());
-                    System.out.println("PRECIO: " + articulo.calcularPrecioFinal());
-                    System.out.println("STOCK: " + articulo.getStock());
-                }
-                System.out.println("--------------------------------------------------------");
-            }
-        }
-    }
+   
 
     // Funci que busca un articulo por su codigo de identificacion
     private Articulo buscarArticuloPorCodigo(int codigoIngresado) {
@@ -460,7 +452,7 @@ public class MenuCliente {
         for (Usuario usuario : listaUsuarios) {
             if (usuario instanceof Empleado) {
                 // Obtener la lista de artículos del empleado
-                ArrayList<Articulo> articulosDisponibles = ((Empleado) usuario).getListaDeArticulos();
+                ArrayList<Articulo> articulosDisponibles = ((Empleado) usuario).getListaArticulos();
 
                 // Buscar el artículo por su código
                 for (Articulo articulo : articulosDisponibles) {

@@ -155,7 +155,7 @@ public class Carrito {
             if (usuario instanceof Empleado) {
                 Empleado empleado = (Empleado) usuario;
 
-                for (Articulo producto : empleado.getListaDeArticulos()) {
+                for (Articulo producto : empleado.getListaArticulos()) {
                     if (producto.getId_articulo() == articulo.getId_articulo()) {
                         int productoStockActual = producto.getStock();
                         producto.setStock(productoStockActual - cantidad);
